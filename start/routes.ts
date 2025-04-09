@@ -13,7 +13,7 @@ const AuthController = () => import('#controllers/auth_controller')
 
 router.post('/auth/register', [AuthController, 'register'])
 router.post('/auth/login', [AuthController, 'login'])
-router.post('/auth/logout', [AuthController, 'logout'])
+router.post('/auth/logout', [AuthController, 'logout']).use(middleware.auth())
 router.group(() => {
   router.resource('users', UsersController);
 }).middleware(middleware.auth())

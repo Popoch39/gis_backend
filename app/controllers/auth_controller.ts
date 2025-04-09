@@ -13,7 +13,6 @@ export default class AuthController {
     const payload = await request.validateUsing(createUserValidator);
     const user = await this.userService.create(payload);
     const token = await User.accessTokens.create(user);
-    console.log(user);
     return response.ok({
       token: token,
       user: user
