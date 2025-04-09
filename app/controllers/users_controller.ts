@@ -10,8 +10,9 @@ export default class UsersController {
   /**
    * Display a list of resource
    */
-  async index({ }: HttpContext) {
-    return this.userService.all();
+  async index({ response }: HttpContext) {
+    const users = await this.userService.all();
+    return response.ok({ users });
   }
 
   /**
@@ -22,9 +23,10 @@ export default class UsersController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {
+  async store({ request, response }: HttpContext) {
     const payload = await request.validateUsing(createUserValidator);
-    return this.userService.create(payload);
+    const user = await this.userService.create(payload);
+    return response.ok({ user });
   }
 
   /**
