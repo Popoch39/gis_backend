@@ -15,6 +15,14 @@ export default class extends BaseSchema {
       table.timestamp('updated_at')
     })
 
+
+    // SRID 4326 for geo col
+    this.raw(`
+      ALTER TABLE features
+      ALTER COLUMN geometry TYPE geometry(Geometry, 4326)
+      USING ST_SetSRID(geometry, 4326)
+    `)
+
     this.schema.raw(`
       CREATE INDEX features_geometry_idx
       ON features

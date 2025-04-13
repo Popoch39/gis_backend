@@ -35,6 +35,9 @@ export default class UsersController {
    */
   async show({ params, response }: HttpContext) {
     const user = await this.userService.find(params.id)
+    if (!user) {
+      return response.notFound({ message: 'User not found' });
+    }
     return response.ok({ user });
   }
 

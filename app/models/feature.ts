@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import Layer from "#models/layer"
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import { featureType } from '#validators/feature'
+import { GeometryType } from '../types/postgisTypes.js'
 
 export default class Feature extends BaseModel {
 
@@ -16,7 +16,7 @@ export default class Feature extends BaseModel {
   declare geometry: string
 
   @column()
-  declare geometryType: featureType
+  declare geometryType: GeometryType
 
   @column()
   declare layerId: number

@@ -1,6 +1,5 @@
 import { UserService } from "#services/user_service"
 import testUtils from "@adonisjs/core/services/test_utils"
-import { Database } from "@adonisjs/lucid/database"
 import { test } from "@japa/runner"
 
 test.group('User Model & Service', (group) => {
@@ -10,7 +9,7 @@ test.group('User Model & Service', (group) => {
   test('can create a new user', async ({ assert }) => {
     const userService = new UserService()
     const userData = {
-      email: 'anotherTest@example.com',
+      email: 'anotherTestbruh@example.com',
       password: 'password123',
       fullName: 'Test User'
     }

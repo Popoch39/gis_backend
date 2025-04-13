@@ -22,7 +22,6 @@ export class LayerService {
     return await Layer.findOrFail(id);
   }
 
-
   async countByUserId(userId: number) {
     const layers = await Layer.query().where('user_id', userId);
     return layers.length;
