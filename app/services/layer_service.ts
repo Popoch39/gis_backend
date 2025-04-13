@@ -18,13 +18,13 @@ export class LayerService {
     return layer;
   }
 
+  async show(id: number) {
+    return await Layer.findOrFail(id);
+  }
+
 
   async countByUserId(userId: number) {
-    const count = await Layer.query().where('user_id', userId).count('* as count');
-    if (!count[0].$extras.count) {
-      return 0;
-    } else {
-      return count[0].$extras.count;
-    }
+    const layers = await Layer.query().where('user_id', userId);
+    return layers.length;
   }
 }

@@ -1,3 +1,4 @@
+
 import { createUserValidator, updateUserValidator } from '#validators/user';
 import type { HttpContext } from '@adonisjs/core/http'
 import { inject } from '@adonisjs/core'
@@ -32,14 +33,10 @@ export default class UsersController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {
-    return this.userService.find(params.id);
+  async show({ params, response }: HttpContext) {
+    const user = await this.userService.find(params.id)
+    return response.ok({ user });
   }
-
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) { }
 
   /**
    * Handle form submission for the edit action
@@ -52,5 +49,8 @@ export default class UsersController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) { }
+  async destroy({ params, response }: HttpContext) {
+    await this.userService.delete(params.id);
+    return response.ok({ message: 'User deleted' });
+  }
 }

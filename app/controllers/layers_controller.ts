@@ -13,12 +13,10 @@ export default class LayersController {
   /**
    * Display a list of resource
    */
-  async index() { }
-
-  /**
-   * Display form to create a new record
-   */
-  async create() { }
+  async index({ response }: HttpContext) {
+    const layers = await this.layerSerice.all();
+    return response.ok({ layers });
+  }
 
   /**
    * Handle form submission for the create action
@@ -41,7 +39,10 @@ export default class LayersController {
   /**
    * Show individual record
    */
-  async show() { }
+  async show({ params, response }: HttpContext) {
+    const layer = await this.layerSerice.show(params.id);
+    return response.ok({ layer });
+  }
 
   /**
    * Edit individual record

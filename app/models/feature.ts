@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import Layer from "#models/layer"
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { featureType } from '#validators/feature'
 
 export default class Feature extends BaseModel {
 
@@ -15,7 +16,7 @@ export default class Feature extends BaseModel {
   declare geometry: string
 
   @column()
-  declare geometryType: string // TODO: make it an enum
+  declare geometryType: featureType
 
   @column()
   declare layerId: number

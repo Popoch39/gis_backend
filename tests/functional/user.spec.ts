@@ -10,7 +10,7 @@ test.group('User Model & Service', (group) => {
   test('can create a new user', async ({ assert }) => {
     const userService = new UserService()
     const userData = {
-      email: 'test@example.com',
+      email: 'anotherTest@example.com',
       password: 'password123',
       fullName: 'Test User'
     }

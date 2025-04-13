@@ -7,13 +7,19 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('name').nullable()
-      table.specificType('geometry', 'geometry').notNullable()
+      table.geometry('geometry').notNullable()
       table.string('geometry_type').notNullable()
       table.integer('layer_id').unsigned().references('id').inTable('layers').onDelete('CASCADE')
 
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
+
+    this.schema.raw(`
+      CREATE INDEX features_geometry_idx
+      ON features
+      USING GIST (geometry)
+    `)
   }
 
   async down() {
